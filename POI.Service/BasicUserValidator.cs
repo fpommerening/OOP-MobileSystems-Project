@@ -9,7 +9,7 @@ namespace POI.Service
     {
         public ClaimsPrincipal Validate(string username, string password)
         {
-            if (password.ToLowerInvariant() != $"MediaProject-{DateTime.Now:yyyyMMdd}")
+            if (password.ToLowerInvariant() != $"mediaproject-{DateTime.Now:yyyyMMdd}")
             {
                 return null;
             }

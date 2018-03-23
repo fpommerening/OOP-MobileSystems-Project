@@ -33,6 +33,22 @@ namespace POI.Service.Data
         {
             var list = new List<PointOfInterest>();
 
+            var client = Client();
+            var db = client.GetDatabase("PointOfInterestStore");
+            var collection = db.GetCollection<PointOfInterest>("PointOfInterests");
+            var builder = Builders<PointOfInterest>.Filter;
+
+            //builder.GeoWithinCenterSphere(x => x.loc, latitude, longtitude, 10);
+
+            //builder.GeoWithinCenterSphere(x => x.loc, latitude, longtitude, 10);
+
+            
+
+        
+            
+
+
+
             return list;
         }
 

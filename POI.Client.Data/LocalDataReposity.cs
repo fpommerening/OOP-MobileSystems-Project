@@ -2,7 +2,7 @@
 
 namespace POI.Client.Data
 {
-    public class Class1
+    public class LocalDataReposity
     {
     }
 }

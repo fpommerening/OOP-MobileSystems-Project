@@ -1,6 +1,7 @@
 ﻿using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace POI.Service.Data
 {
@@ -23,6 +24,8 @@ namespace POI.Service.Data
 
         [BsonElement("latitude")]
         public int Latitude { get; set; }
+
+        public GeoJsonPoint<GeoJson2DGeographicCoordinates> loc { get; set; }
 
         [BsonElement("longtitude")]
         public int Longtitude { get; set; }
