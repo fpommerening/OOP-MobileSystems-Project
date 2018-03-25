@@ -13,7 +13,7 @@ namespace POI.Client
 		{
 			InitializeComponent();
 
-			MainPage = new POI.Client.MainPage();
+			MainPage = new NavigationPage(new POI.Client.MainPage());
 		}
 
 		protected override void OnStart ()

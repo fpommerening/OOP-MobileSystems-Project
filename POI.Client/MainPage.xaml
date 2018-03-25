@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:POI.Client"
              x:Class="POI.Client.MainPage">
-<StackLayout>
-    <Label Text="Text" />
 
-
-    <Label Text="Und noch mehr Text" />
-
-    </StackLayout>
-
-	
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="MenuItem_OnClicked"></ToolbarItem>
+        <ToolbarItem Text="T2"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Text" />
+            <Label Text="Und noch mehr Text" />
+        </StackLayout>
+    </ContentPage.Content>    
 </ContentPage>

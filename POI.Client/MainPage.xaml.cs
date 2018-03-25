@@ -13,5 +13,12 @@ namespace POI.Client
 		{
 			InitializeComponent();
 		}
+
+	    private void MenuItem_OnClicked(object sender, EventArgs e)
+	    {
+	        var loc = new Location();
+	        loc.NavigationProp = Navigation;
+            Navigation.PushAsync(loc, true);
+	    }
 	}
 }

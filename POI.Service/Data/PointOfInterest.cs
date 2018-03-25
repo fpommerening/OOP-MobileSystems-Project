@@ -10,6 +10,9 @@ namespace POI.Service.Data
         [BsonId]
         public ObjectId Id { get; set; }
 
+        [BsonElement("externalid")]
+        public Guid ExternalId { get; set; }
+
         [BsonElement("name")]
         public string Name { get; set; }
 
@@ -22,13 +25,8 @@ namespace POI.Service.Data
         [BsonElement("timestamp")]
         public DateTime Timestamp { get; set; }
 
-        [BsonElement("latitude")]
-        public int Latitude { get; set; }
-
-        public GeoJsonPoint<GeoJson2DGeographicCoordinates> loc { get; set; }
-
-        [BsonElement("longtitude")]
-        public int Longtitude { get; set; }
+        [BsonElement("location")]
+        public GeoJsonPoint<GeoJson2DGeographicCoordinates> Location { get; set; }
 
         [BsonElement("user")]
         public string User { get; set; }

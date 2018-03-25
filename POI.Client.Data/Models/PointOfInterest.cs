@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace POI.Contracts
+namespace POI.Client.Data.Models
 {
     public class PointOfInterest
     {
@@ -17,5 +17,7 @@ namespace POI.Contracts
         public int Longtitude { get; set; }
 
         public string User { get; set; }
+
+        public bool Transmitted { get; set; }
     }
 }
