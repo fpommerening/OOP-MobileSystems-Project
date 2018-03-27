@@ -101,8 +101,8 @@ namespace POI.Client.ViewModels
         {
             var poi = new Data.Models.PointOfInterest
             {
-                Latitude = (int) Latitude * 100000,
-                Longtitude = (int) Longtitude * 100000,
+                Latitude = Latitude,
+                Longtitude = Longtitude,
                 Name = Subject,
                 Description = Description,
                 Id = Guid.NewGuid(),

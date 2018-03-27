@@ -82,40 +82,20 @@ namespace POI.Client.ViewModels
             //var sc = new ServiceClient(_dataRepository.Configuration.ServiceUrl);
             //var dto = await sc.GetPointsOfInterest((int) Latitude * 100000, (int) Longtitude * 100000);
 
-            PointsOfInterest.Add(new PointOfInterestListItemViewModel()
-            {
-                Latitude = 741,
-                Longtitude = 11
-            });
+          var bla = _dataRepository.PointOfInterestList;
+            PointsOfInterest.Clear();
 
-            var bla = _dataRepository.PointOfInterestList;
-
-            if (!bla.Any())
+            if (!bla.Any()) return;
+            foreach (var b in bla)
             {
-                for (int i = 0; i < 100; i++)
+                var p = new PointOfInterestListItemViewModel
                 {
-                    PointsOfInterest.Add(new PointOfInterestListItemViewModel()
-                    {
-                        Latitude = 155,
-                        Longtitude = 11
-                    });
-                }
-
-               
-            }
-            else
-            {
-                foreach (var b in bla)
-                {
-                    var p = new PointOfInterestListItemViewModel
-                    {
-                        Latitude = 99,
-                        Longtitude = 11,
-                        Subject = b.Name,
-                        //CreateOn = b.CreateOn
-                    };
-                    PointsOfInterest.Add(p);
-                }
+                    Latitude = b.Latitude,
+                    Longtitude = b.Longtitude,
+                    Subject = b.Name,
+                    CreateOn = b.CreateOn
+                };
+                PointsOfInterest.Add(p);
             }
 
         }
