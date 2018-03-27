@@ -1,23 +1,26 @@
 ﻿using System;
-using POI.Client.Data.FileSystem;
+using System.Collections.ObjectModel;
+using System.Linq;
+using POI.Client.Data;
 using Xamarin.Forms;
 
 namespace POI.Client.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
-        private INavigation _navigation;
-        private IPathService _pathService;
+        private readonly INavigation _navigation;
+        private readonly LocalDataRepository _dataRepository;
         private decimal _longtitude = Decimal.Zero;
         private decimal _latitude = Decimal.Zero;
 
-        public MainPageViewModel(INavigation navigation, IPathService pathService)
+        public MainPageViewModel(INavigation navigation, LocalDataRepository dataReposity)
         {
             _navigation = navigation;
-            _pathService = pathService;
+            _dataRepository = dataReposity;
             CreatePoICommand = new Command(CreatePoI, CanCreatePoI);
             GetLocationCommand = new Command(GetLocation);
             FillListCommand = new Command(FillList, CanFillList);
+            PointsOfInterest = new ObservableCollection<PointOfInterestListItemViewModel>();
         }
 
         public decimal Latitude
@@ -44,6 +47,8 @@ namespace POI.Client.ViewModels
             }
         }
 
+        public ObservableCollection<PointOfInterestListItemViewModel> PointsOfInterest { get; set; }
+
         public Command CreatePoICommand { get; set; }
 
         public Command GetLocationCommand { get; set; }
@@ -52,13 +57,12 @@ namespace POI.Client.ViewModels
 
         private void CreatePoI()
         {
-            var poiViewModel = new PointOfInterestViewModel(_navigation, _pathService)
+            var poiViewModel = new PointOfInterestViewModel(_navigation, _dataRepository)
             {
                 Longtitude = this.Longtitude,
                 Latitude = this.Latitude
             };
-
-            var poi = new PointOfInterest {ViewModel = poiViewModel};
+            var poi = new PointOfInterest(poiViewModel);
             _navigation.PushAsync(poi);
         }
 
@@ -75,6 +79,44 @@ namespace POI.Client.ViewModels
 
         private void FillList()
         {
+            //var sc = new ServiceClient(_dataRepository.Configuration.ServiceUrl);
+            //var dto = await sc.GetPointsOfInterest((int) Latitude * 100000, (int) Longtitude * 100000);
+
+            PointsOfInterest.Add(new PointOfInterestListItemViewModel()
+            {
+                Latitude = 741,
+                Longtitude = 11
+            });
+
+            var bla = _dataRepository.PointOfInterestList;
+
+            if (!bla.Any())
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    PointsOfInterest.Add(new PointOfInterestListItemViewModel()
+                    {
+                        Latitude = 155,
+                        Longtitude = 11
+                    });
+                }
+
+               
+            }
+            else
+            {
+                foreach (var b in bla)
+                {
+                    var p = new PointOfInterestListItemViewModel
+                    {
+                        Latitude = 99,
+                        Longtitude = 11,
+                        Subject = b.Name,
+                        //CreateOn = b.CreateOn
+                    };
+                    PointsOfInterest.Add(p);
+                }
+            }
 
         }
 
@@ -82,7 +124,5 @@ namespace POI.Client.ViewModels
         {
             return Longtitude != Decimal.Zero && Latitude != Decimal.Zero;
         }
-
-
     }
 }

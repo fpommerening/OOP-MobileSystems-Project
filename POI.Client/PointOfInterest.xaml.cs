@@ -7,12 +7,11 @@ namespace POI.Client
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PointOfInterest : ContentPage
 	{
-		public PointOfInterest()
+		public PointOfInterest(PointOfInterestViewModel viewModel)
 		{
 			InitializeComponent ();
+		    this.BindingContext = viewModel;
 		}
-
-        public PointOfInterestViewModel ViewModel { get; set; }
 	    
 	}
 }

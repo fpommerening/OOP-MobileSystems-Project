@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using POI.Client.Data;
 using POI.Client.Data.FileSystem;
 using POI.Client.ViewModels;
 using Xamarin.Forms;
@@ -18,7 +14,9 @@ namespace POI.Client
             InitializeComponent();
 
 		    var pathService = DependencyService.Get<IPathService>();
-		    this.BindingContext = new MainPageViewModel(Navigation, pathService);
+		    var localDataRepository = new LocalDataRepository(pathService.GetDataPath());
+		    localDataRepository.Load().ConfigureAwait(false);
+            this.BindingContext = new MainPageViewModel(Navigation, localDataRepository);
         }
 	    
 	}

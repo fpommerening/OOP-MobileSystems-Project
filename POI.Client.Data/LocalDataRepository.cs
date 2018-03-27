@@ -9,12 +9,12 @@ using POI.Client.Data.Models;
 
 namespace POI.Client.Data
 {
-    public class LocalDataReposity
+    public class LocalDataRepository
     {
         private readonly string _configurationPath;
         private readonly string _pointsPath;
 
-        public LocalDataReposity(string localPath)
+        public LocalDataRepository(string localPath)
         {
             _configurationPath = Path.Combine(localPath, "configuration.json");
             _pointsPath = Path.Combine(localPath, "points.json");

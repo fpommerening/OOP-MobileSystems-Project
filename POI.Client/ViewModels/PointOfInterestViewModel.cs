@@ -1,25 +1,25 @@
-﻿using POI.Client.Data;
-using POI.Client.Data.FileSystem;
+﻿using System;
+using POI.Client.Data;
 using Xamarin.Forms;
 
 namespace POI.Client.ViewModels
 {
     public class PointOfInterestViewModel : BaseViewModel
     {
-        private INavigation _navigation;
-        private IPathService _pathService;
+        private readonly INavigation _navigation;
+        private readonly LocalDataRepository _dataRepository;
         private decimal _latitude;
         private decimal _longtitude;
         private string _subject;
         private string _description;
-        private string _createOn;
+        private DateTime _createOn;
         private string _user;
         private bool _transmitted;
 
-        public PointOfInterestViewModel(INavigation navigation, IPathService pathService)
+        public PointOfInterestViewModel(INavigation navigation, LocalDataRepository dataRepository)
         {
             _navigation = navigation;
-            _pathService = pathService;
+            _dataRepository = dataRepository;
             SaveCommand = new Command(Save, CanSave);
         }
 
@@ -50,6 +50,7 @@ namespace POI.Client.ViewModels
             {
                 _subject = value;
                 OnPropertyChanged();
+                SaveCommand.ChangeCanExecute();
             }
         }
 
@@ -60,10 +61,11 @@ namespace POI.Client.ViewModels
             {
                 _description = value;
                 OnPropertyChanged();
+                SaveCommand.ChangeCanExecute();
             }
         }
 
-        public string CreateOn
+        public DateTime CreateOn
         {
             get => _createOn;
             set
@@ -95,19 +97,28 @@ namespace POI.Client.ViewModels
 
         public Command SaveCommand { get; set; }
 
-        private void Save()
+        private async void Save()
         {
-            _navigation.PopAsync();
+            var poi = new Data.Models.PointOfInterest
+            {
+                Latitude = (int) Latitude * 100000,
+                Longtitude = (int) Longtitude * 100000,
+                Name = Subject,
+                Description = Description,
+                Id = Guid.NewGuid(),
+                Transmitted = false,
+                CreateOn = DateTime.Now,
+                User = _dataRepository.Configuration.User
+            };
+            _dataRepository.PointOfInterestList.Add(poi);
 
-            //var localDataRepo = new LocalDataReposity(_pathService.GetDataPath());
-            //localDataRepo.Load().
-
-
+            await _dataRepository.Save();
+            await _navigation.PopAsync();
         }
 
         private bool CanSave()
         {
-            return true;
+            return !string.IsNullOrEmpty(Subject) && !string.IsNullOrEmpty(Description);
         }
     }
 }

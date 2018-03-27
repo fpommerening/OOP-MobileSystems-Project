@@ -6,15 +6,14 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Latitude"></Label>
-            <Entry IsEnabled="False"></Entry>
+            <Entry IsEnabled="False" Text="{Binding Latitude, Mode=TwoWay}"></Entry>
             <Label Text="Longtitude"></Label>
-            <Entry IsEnabled="False"></Entry>
-
+            <Entry IsEnabled="False" Text="{Binding Longtitude, Mode=TwoWay}"></Entry>
             <Label Text="Subject"></Label>
-            <Entry Placeholder="Kurzinfo"></Entry>
+            <Entry Placeholder="Kurzinfo" Text="{Binding Subject, Mode=TwoWay}"></Entry>
             <Label Text="Description"></Label>
-            <Entry Placeholder="Beschreibung"></Entry>
-            <Button Text="Speichern"></Button>
+            <Entry Placeholder="Beschreibung" Text="{Binding Description, Mode=TwoWay}"></Entry>
+            <Button Text="Speichern" Command="{Binding SaveCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

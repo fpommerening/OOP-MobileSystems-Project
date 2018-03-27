@@ -22,6 +22,24 @@
             <Entry IsEnabled="False" Text="{Binding Latitude, Mode= TwoWay}" Placeholder="Positionsbestimmung erforderlich"></Entry>
             <Label Text="Longtitude"></Label>
             <Entry IsEnabled="False" Text="{Binding Longtitude, Mode= TwoWay}" Placeholder="Positionsbestimmung erforderlich"></Entry>
+
+            <Label Text="PoI in der Umgebung"></Label>
+            <ListView ItemsSource="{Binding PointsOfInterest, Mode=TwoWay}" CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Latitude}"></Label>
+                                <Label Text="{Binding Longtitude}"></Label>
+                                <Label Text="{Binding Subject}"></Label>
+                                <Label Text="{Binding CreateOn}"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </StackLayout>
     </ContentPage.Content>    
 </ContentPage>
+
