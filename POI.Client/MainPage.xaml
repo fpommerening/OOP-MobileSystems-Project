@@ -5,13 +5,23 @@
              x:Class="POI.Client.MainPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="MenuItem_OnClicked"></ToolbarItem>
-        <ToolbarItem Text="T2"></ToolbarItem>
+        <ToolbarItem Text="GPS-Abfragen" Command="{Binding GetLocationCommand}"></ToolbarItem>
+        <ToolbarItem Text="Umkreissuche" Command="{Binding FillListCommand}"></ToolbarItem>
+        <ToolbarItem Text="Hinzufügen" Command="{Binding CreatePoICommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android, WinPhone">10, 0, 10, 0</On>
+            <On Platform="iOS">10, 20, 10, 0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Text" />
-            <Label Text="Und noch mehr Text" />
+        <StackLayout Spacing="10">
+            <Label Text="Aktuelle Position"></Label>
+            <Label Text="Latitude" ></Label>
+            <Entry IsEnabled="False" Text="{Binding Latitude, Mode= TwoWay}" Placeholder="Positionsbestimmung erforderlich"></Entry>
+            <Label Text="Longtitude"></Label>
+            <Entry IsEnabled="False" Text="{Binding Longtitude, Mode= TwoWay}" Placeholder="Positionsbestimmung erforderlich"></Entry>
         </StackLayout>
     </ContentPage.Content>    
 </ContentPage>

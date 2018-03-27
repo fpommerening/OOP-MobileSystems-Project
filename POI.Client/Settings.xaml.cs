@@ -10,18 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace POI.Client
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Location : ContentPage
+	public partial class Settings : ContentPage
 	{
-		public Location ()
+		public Settings ()
 		{
 			InitializeComponent ();
 		}
-
-        public INavigation NavigationProp { get; set; }
-
-	    private void Button_OnClicked(object sender, EventArgs e)
-	    {
-	        NavigationProp.PopToRootAsync(true);
-	    }
 	}
 }

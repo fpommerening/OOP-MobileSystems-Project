@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="POI.Client.PointOfInterest">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Latitude"></Label>
+            <Entry IsEnabled="False"></Entry>
+            <Label Text="Longtitude"></Label>
+            <Entry IsEnabled="False"></Entry>
+
+            <Label Text="Subject"></Label>
+            <Entry Placeholder="Kurzinfo"></Entry>
+            <Label Text="Description"></Label>
+            <Entry Placeholder="Beschreibung"></Entry>
+            <Button Text="Speichern"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

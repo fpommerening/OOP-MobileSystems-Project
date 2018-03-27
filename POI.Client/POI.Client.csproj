@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\POI.Client.Data\POI.Client.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Mono.Android">
       <HintPath>..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v7.1\Mono.Android.dll</HintPath>
     </Reference>
@@ -20,16 +24,22 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="PointOfInterest.xaml.cs">
+      <DependentUpon>PointOfInterest.xaml</DependentUpon>
+    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Location.xaml">
+    <EmbeddedResource Update="PointOfInterest.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="MasterDetailPage1Master.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Settings.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

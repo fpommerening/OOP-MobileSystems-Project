@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using POI.Client.Data.FileSystem;
+using POI.Client.ViewModels;
 using Xamarin.Forms;
 
 namespace POI.Client
@@ -11,14 +13,13 @@ namespace POI.Client
 	{
 		public MainPage()
 		{
-			InitializeComponent();
-		}
+		   
 
-	    private void MenuItem_OnClicked(object sender, EventArgs e)
-	    {
-	        var loc = new Location();
-	        loc.NavigationProp = Navigation;
-            Navigation.PushAsync(loc, true);
-	    }
+            InitializeComponent();
+
+		    var pathService = DependencyService.Get<IPathService>();
+		    this.BindingContext = new MainPageViewModel(Navigation, pathService);
+        }
+	    
 	}
 }

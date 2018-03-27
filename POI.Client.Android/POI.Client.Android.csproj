@@ -55,6 +55,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileSystem\PathService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +81,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\POI.Client.Data\POI.Client.Data.csproj">
+      <Project>{5805ab7e-a697-4086-af60-e89642432d3d}</Project>
+      <Name>POI.Client.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\POI.Client\POI.Client.csproj">
       <Project>{74060759-A8F9-4AB1-A3CA-9D671CB45F90}</Project>
       <Name>POI.Client</Name>
