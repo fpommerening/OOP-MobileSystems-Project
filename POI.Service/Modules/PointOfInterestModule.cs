@@ -29,6 +29,7 @@ namespace POI.Service.Modules
                     Location = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(geo),
                     CreateOn = dto.CreateOn,
                     Timestamp = DateTime.UtcNow,
+                    User = dto.User,
                     ExternalId = dto.Id
                 };
                 
