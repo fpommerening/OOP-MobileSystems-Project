@@ -4,7 +4,7 @@ services:
         image: mongo:3.6
         networks:
             - functions
-    opi-service:
+    service:
         image: fpommerening/spartakiade2018:poi-service
         networks:
             - functions
@@ -15,10 +15,19 @@ services:
           LETSENCRYPT_HOST: "poi.openfaas-dotnet.de"
           VIRTUAL_HOST: "poi.openfaas-dotnet.de"
           VIRTUAL_PORT: "8080"
+        volumes: 
+          - data:/data/db
+        depends_on:
+            - documentdb
 secrets:
   DocumentDBCnn:
       external:
           name: PoIDBCnn
+volumes:
+  data:
+    external:
+      name: poi-data
+
           
 networks:
   functions:
