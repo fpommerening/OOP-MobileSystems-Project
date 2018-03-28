@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Android.Webkit;
 using Xamarin.Forms;
 
 namespace POI.Client
@@ -13,8 +13,9 @@ namespace POI.Client
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new POI.Client.MainPage());
-		}
+			MainPage = new NavigationPage(new MainPage());
+
+        }
 
 		protected override void OnStart ()
 		{

@@ -12,9 +12,9 @@ namespace POI.Client.Data.Models
 
         public DateTime CreateOn { get; set; }
 
-        public Decimal Latitude { get; set; }
+        public Double Latitude { get; set; }
 
-        public Decimal Longtitude { get; set; }
+        public Double Longtitude { get; set; }
 
         public string User { get; set; }
 

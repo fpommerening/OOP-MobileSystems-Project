@@ -9,7 +9,6 @@ namespace POI.Client.Droid.FileSystem
         public string GetDataPath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using POI.Client.Data;
 using POI.Client.Data.FileSystem;
+using POI.Client.Geolocation;
 using POI.Client.ViewModels;
 using Xamarin.Forms;
 
@@ -14,9 +15,11 @@ namespace POI.Client
             InitializeComponent();
 
 		    var pathService = DependencyService.Get<IPathService>();
-		    var localDataRepository = new LocalDataRepository(pathService.GetDataPath());
+            var geolocationService = DependencyService.Get<IGeolocationService>();
+            var localDataRepository = new LocalDataRepository(pathService.GetDataPath());
+            
 		    localDataRepository.Load().ConfigureAwait(false);
-            this.BindingContext = new MainPageViewModel(Navigation, localDataRepository);
+            this.BindingContext = new MainPageViewModel(Navigation, localDataRepository, geolocationService);
         }
 	    
 	}

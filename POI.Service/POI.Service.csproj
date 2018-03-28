@@ -5,7 +5,6 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-  <PackageReference Include="GeoCoordinate" Version="2.0.1" />
   <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
   <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
   <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />

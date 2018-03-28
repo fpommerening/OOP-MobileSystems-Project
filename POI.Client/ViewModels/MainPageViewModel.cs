@@ -2,7 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using POI.Client.Data;
+using POI.Client.Geolocation;
 using Xamarin.Forms;
+
+
+
 
 namespace POI.Client.ViewModels
 {
@@ -10,22 +14,24 @@ namespace POI.Client.ViewModels
     {
         private readonly INavigation _navigation;
         private readonly LocalDataRepository _dataRepository;
-        private decimal _longtitude = Decimal.Zero;
-        private decimal _latitude = Decimal.Zero;
+        private readonly IGeolocationService _locationService;
+        private double _longtitude = Double.NaN;
+        private double _latitude = Double.NaN;
 
-        public MainPageViewModel(INavigation navigation, LocalDataRepository dataReposity)
+        public MainPageViewModel(INavigation navigation, LocalDataRepository dataReposity, IGeolocationService locationService)
         {
             _navigation = navigation;
             _dataRepository = dataReposity;
+            _locationService = locationService;
             CreatePoICommand = new Command(CreatePoI, CanCreatePoI);
-            GetLocationCommand = new Command(GetLocation);
+            GetLocationCommand = new Command(GetLocation, CanGetLocation);
             FillListCommand = new Command(FillList, CanFillList);
             OpenSettingsCommand = new Command(OpenSettings);
             OpenMyPoIListCommand = new Command(OpenMyPoIList);
             PointsOfInterest = new ObservableCollection<PointOfInterestListItemViewModel>();
         }
 
-        public decimal Latitude
+        public double Latitude
         {
             get => _latitude;
             set
@@ -37,7 +43,7 @@ namespace POI.Client.ViewModels
             }
         }
 
-        public decimal Longtitude
+        public double Longtitude
         {
             get => _longtitude;
             set
@@ -74,13 +80,35 @@ namespace POI.Client.ViewModels
 
         private bool CanCreatePoI()
         {
-            return Longtitude != Decimal.Zero && Latitude != Decimal.Zero;
+            return !double.IsNaN(Longtitude) && !double.IsNaN(Latitude);
         }
 
-        private void GetLocation()
+        private async void GetLocation()
         {
-            Longtitude = DateTime.Now.Second;
-            Latitude = DateTime.Now.Second - 10;
+            Position position = null;
+
+            position = await _locationService.GetPositionAsync();
+
+            if (position == null)
+            {
+                position = await _locationService.GetLastKnownLocationAsync();
+            }
+
+            if (position != null)
+            {
+                Longtitude = position.Longtitude;
+                Latitude = position.Latitude;
+            }
+            else
+            {
+                Latitude = double.NaN;
+                Longtitude = double.NaN;
+            }
+        }
+
+        private bool CanGetLocation()
+        {
+            return _locationService.IsGeolocationAvailable && _locationService.IsGeolocationEnabled;
         }
 
         private async void FillList()
@@ -106,7 +134,7 @@ namespace POI.Client.ViewModels
 
         private bool CanFillList()
         {
-            return Longtitude != Decimal.Zero && Latitude != Decimal.Zero;
+            return !double.IsNaN(Longtitude) && !double.IsNaN(Latitude);
         }
 
         public void OpenSettings()

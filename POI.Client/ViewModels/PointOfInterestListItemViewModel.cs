@@ -6,9 +6,9 @@ namespace POI.Client.ViewModels
     {
         private bool _transmitted;
 
-        public decimal Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public decimal Longtitude { get; set; }
+        public double Longtitude { get; set; }
 
         public string Subject { get; set; }
 

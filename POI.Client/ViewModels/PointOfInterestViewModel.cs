@@ -8,8 +8,8 @@ namespace POI.Client.ViewModels
     {
         private readonly INavigation _navigation;
         private readonly LocalDataRepository _dataRepository;
-        private decimal _latitude;
-        private decimal _longtitude;
+        private double _latitude;
+        private double _longtitude;
         private string _subject;
         private string _description;
         private DateTime _createOn;
@@ -23,7 +23,7 @@ namespace POI.Client.ViewModels
             SaveCommand = new Command(Save, CanSave);
         }
 
-        public decimal Latitude
+        public double Latitude
         {
             get => _latitude;
             set
@@ -33,7 +33,7 @@ namespace POI.Client.ViewModels
             }
         }
 
-        public decimal Longtitude
+        public double Longtitude
         {
             get => _longtitude;
             set
