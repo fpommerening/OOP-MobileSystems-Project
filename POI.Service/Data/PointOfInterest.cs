@@ -16,7 +16,7 @@ namespace POI.Service.Data
         [BsonElement("name")]
         public string Name { get; set; }
 
-        [BsonElement("name")]
+        [BsonElement("description")]
         public string Description { get; set; }
 
         [BsonElement("createon")]
