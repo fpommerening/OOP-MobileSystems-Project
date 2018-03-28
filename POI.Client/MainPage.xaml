@@ -30,12 +30,16 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Latitude}"></Label>
-                                <Label Text="{Binding Longtitude}"></Label>
-                                <Label Text="{Binding Subject}"></Label>
-                                <Label Text="{Binding User}"></Label>
-                                <Label Text="{Binding CreateOn:d}"></Label>
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Latitude, StringFormat='Breite {0}°'}"></Label>
+                                    <Label Text="{Binding Longtitude, StringFormat='Länge {0}°'}"></Label>
+                                    <Label Text="{Binding CreateOn, StringFormat='vom {0:d}'}"></Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Subject}"></Label>
+                                    <Label Text="{Binding User, StringFormat='von {0}'}"></Label>
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

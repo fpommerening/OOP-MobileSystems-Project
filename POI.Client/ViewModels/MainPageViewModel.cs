@@ -116,7 +116,6 @@ namespace POI.Client.ViewModels
             var sc = new ServiceClient(_dataRepository.Configuration.ServiceUrl);
             var dto = await sc.GetPointsOfInterest((int) Latitude * 100000, (int) Longtitude * 100000);
 
-          
             PointsOfInterest.Clear();
 
             if (!dto.Any()) return;
@@ -124,10 +123,11 @@ namespace POI.Client.ViewModels
             {
                 PointsOfInterest.Add(new PointOfInterestListItemViewModel
                 {
-                    Latitude = poi.Latitude / 100000,
-                    Longtitude = poi.Longtitude / 100000,
+                    Latitude = (double)poi.Latitude / 100000,
+                    Longtitude = (double)poi.Longtitude / 100000,
                     Subject = poi.Name,
-                    CreateOn = poi.CreateOn
+                    CreateOn = poi.CreateOn,
+                    User = poi.User
                 });
             }
         }

@@ -13,6 +13,8 @@ namespace POI.Client.ViewModels
         public PointOfInterestListViewModel(LocalDataRepository dataRepository)
         {
             _dataRepository = dataRepository;
+            TransmitCommand = new Command(Transmit, CanTransmit);
+            ClearCommand = new Command(Clear, CanClear);
             Items = new ObservableCollection<PointOfInterestListItemViewModel>();
         }
 
@@ -34,13 +36,17 @@ namespace POI.Client.ViewModels
                 });
 
             }
+            TransmitCommand.ChangeCanExecute();
+            ClearCommand.ChangeCanExecute();
         }
 
         public Command TransmitCommand { get; set; }
 
+        public Command ClearCommand { get; set; }
+
         public async void Transmit()
         {
-            if (!string.IsNullOrEmpty(_dataRepository.Configuration.ServiceUrl))
+            if (string.IsNullOrEmpty(_dataRepository.Configuration.ServiceUrl))
             {
                 return;
             }
@@ -62,15 +68,25 @@ namespace POI.Client.ViewModels
                 await sc.SavePointOfInterest(dto);
                 poi.Transmitted = true;
             }
-
             await _dataRepository.Save();
-            TransmitCommand.ChangeCanExecute();
             FillItems();
         }
 
         public bool CanTransmit()
         {
             return Items.Any(x => !x.Transmitted);
+        }
+
+        public async void Clear()
+        {
+            _dataRepository.PointOfInterestList.Clear();
+            await _dataRepository.Save();
+            FillItems();
+        }
+
+        public bool CanClear()
+        {
+            return Items.Any();
         }
     }
 }

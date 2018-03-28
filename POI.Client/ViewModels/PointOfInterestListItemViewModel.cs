@@ -14,6 +14,8 @@ namespace POI.Client.ViewModels
 
         public string Description { get; set; }
 
+        public string User { get; set; }
+
         public DateTime CreateOn { get; set; }
 
         public bool Transmitted

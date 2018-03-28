@@ -2,8 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="POI.Client.PointOfInterestList">
-  
-      <ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Übertragen" Command="{Binding TransmitCommand}"></ToolbarItem>
+        <ToolbarItem Text="Leeren" Command="{Binding ClearCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android, WinPhone">10, 0, 10, 0</On>
+            <On Platform="iOS">10, 20, 10, 0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
           <StackLayout>
               <Label Text="Meine POI"></Label>
               <ListView ItemsSource="{Binding Items, Mode=TwoWay}" CachingStrategy="RecycleElement">
