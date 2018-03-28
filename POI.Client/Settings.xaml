@@ -4,9 +4,11 @@
              x:Class="POI.Client.Settings">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Benutzer"></Label>
+            <Entry Placeholder="Vorname und Nachname" Text="{Binding User, Mode=TwoWay}"></Entry>
+            <Label Text="Service-URL"></Label>
+            <Entry Placeholder="komplette URL" Text="{Binding ServiceUrl, Mode=TwoWay}"></Entry>
+            <Button Text="Speichern" Command="{Binding SaveCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

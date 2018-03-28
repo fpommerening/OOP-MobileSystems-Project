@@ -2,16 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="POI.Client.PointOfInterest">
-
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android, WinPhone">10, 0, 10, 0</On>
+            <On Platform="iOS">10, 20, 10, 0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Latitude"></Label>
             <Entry IsEnabled="False" Text="{Binding Latitude, Mode=TwoWay}"></Entry>
             <Label Text="Longtitude"></Label>
             <Entry IsEnabled="False" Text="{Binding Longtitude, Mode=TwoWay}"></Entry>
-            <Label Text="Subject"></Label>
+            <Label Text="Name"></Label>
             <Entry Placeholder="Kurzinfo" Text="{Binding Subject, Mode=TwoWay}"></Entry>
-            <Label Text="Description"></Label>
+            <Label Text="Beschreibung"></Label>
             <Entry Placeholder="Beschreibung" Text="{Binding Description, Mode=TwoWay}"></Entry>
             <Button Text="Speichern" Command="{Binding SaveCommand}"></Button>
         </StackLayout>

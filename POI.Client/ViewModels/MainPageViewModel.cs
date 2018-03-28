@@ -20,6 +20,8 @@ namespace POI.Client.ViewModels
             CreatePoICommand = new Command(CreatePoI, CanCreatePoI);
             GetLocationCommand = new Command(GetLocation);
             FillListCommand = new Command(FillList, CanFillList);
+            OpenSettingsCommand = new Command(OpenSettings);
+            OpenMyPoIListCommand = new Command(OpenMyPoIList);
             PointsOfInterest = new ObservableCollection<PointOfInterestListItemViewModel>();
         }
 
@@ -55,6 +57,10 @@ namespace POI.Client.ViewModels
 
         public Command FillListCommand { get; set; }
 
+        public Command OpenSettingsCommand { get; set; }
+
+        public Command OpenMyPoIListCommand { get; set; }
+
         private void CreatePoI()
         {
             var poiViewModel = new PointOfInterestViewModel(_navigation, _dataRepository)
@@ -63,7 +69,7 @@ namespace POI.Client.ViewModels
                 Latitude = this.Latitude
             };
             var poi = new PointOfInterest(poiViewModel);
-            _navigation.PushAsync(poi);
+            _navigation.PushAsync(poi, true);
         }
 
         private bool CanCreatePoI()
@@ -77,32 +83,42 @@ namespace POI.Client.ViewModels
             Latitude = DateTime.Now.Second - 10;
         }
 
-        private void FillList()
+        private async void FillList()
         {
-            //var sc = new ServiceClient(_dataRepository.Configuration.ServiceUrl);
-            //var dto = await sc.GetPointsOfInterest((int) Latitude * 100000, (int) Longtitude * 100000);
+            var sc = new ServiceClient(_dataRepository.Configuration.ServiceUrl);
+            var dto = await sc.GetPointsOfInterest((int) Latitude * 100000, (int) Longtitude * 100000);
 
-          var bla = _dataRepository.PointOfInterestList;
+          
             PointsOfInterest.Clear();
 
-            if (!bla.Any()) return;
-            foreach (var b in bla)
+            if (!dto.Any()) return;
+            foreach (var poi in dto)
             {
-                var p = new PointOfInterestListItemViewModel
+                PointsOfInterest.Add(new PointOfInterestListItemViewModel
                 {
-                    Latitude = b.Latitude,
-                    Longtitude = b.Longtitude,
-                    Subject = b.Name,
-                    CreateOn = b.CreateOn
-                };
-                PointsOfInterest.Add(p);
+                    Latitude = poi.Latitude / 100000,
+                    Longtitude = poi.Longtitude / 100000,
+                    Subject = poi.Name,
+                    CreateOn = poi.CreateOn
+                });
             }
-
         }
 
         private bool CanFillList()
         {
             return Longtitude != Decimal.Zero && Latitude != Decimal.Zero;
+        }
+
+        public void OpenSettings()
+        {
+            var settings = new Settings(_dataRepository, _navigation);
+            _navigation.PushAsync(settings, true);
+        }
+
+        public void OpenMyPoIList()
+        {
+            var list = new PointOfInterestList(_dataRepository);
+            _navigation.PushAsync(list, true);
         }
     }
 }

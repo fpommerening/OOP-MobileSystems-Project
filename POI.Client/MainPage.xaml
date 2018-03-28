@@ -8,6 +8,8 @@
         <ToolbarItem Text="GPS-Abfragen" Command="{Binding GetLocationCommand}"></ToolbarItem>
         <ToolbarItem Text="Umkreissuche" Command="{Binding FillListCommand}"></ToolbarItem>
         <ToolbarItem Text="Hinzufügen" Command="{Binding CreatePoICommand}"></ToolbarItem>
+        <ToolbarItem Text="Einstellungen" Command="{Binding OpenSettingsCommand}"></ToolbarItem>
+        <ToolbarItem Text="Liste" Command="{Binding OpenMyPoIListCommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -32,7 +34,8 @@
                                 <Label Text="{Binding Latitude}"></Label>
                                 <Label Text="{Binding Longtitude}"></Label>
                                 <Label Text="{Binding Subject}"></Label>
-                                <Label Text="{Binding CreateOn}"></Label>
+                                <Label Text="{Binding User}"></Label>
+                                <Label Text="{Binding CreateOn:d}"></Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

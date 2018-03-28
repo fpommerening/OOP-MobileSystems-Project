@@ -113,7 +113,7 @@ namespace POI.Client.ViewModels
             _dataRepository.PointOfInterestList.Add(poi);
 
             await _dataRepository.Save();
-            await _navigation.PopAsync();
+            await _navigation.PopAsync(true);
         }
 
         private bool CanSave()

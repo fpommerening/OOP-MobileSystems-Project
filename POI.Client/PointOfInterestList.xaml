@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="POI.Client.PointOfInterestList">
+  
+      <ContentPage.Content>
+          <StackLayout>
+              <Label Text="Meine POI"></Label>
+              <ListView ItemsSource="{Binding Items, Mode=TwoWay}" CachingStrategy="RecycleElement">
+                  <ListView.ItemTemplate>
+                      <DataTemplate>
+                          <ViewCell>
+                              <StackLayout Orientation="Vertical">
+                              <StackLayout Orientation="Horizontal">
+                                  <Label Text="{Binding Latitude}"></Label>
+                                  <Label Text="{Binding Longtitude}"></Label>
+                                  <Label Text="{Binding Subject}"></Label>
+                                  <Label Text="{Binding CreateOn:d}"></Label>
+                              </StackLayout>
+                                  <Label Text="{Binding Description}"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                      </DataTemplate>
+                  </ListView.ItemTemplate>
+                  </ListView>
+        </StackLayout>
+          
+          
+          </ContentPage.Content>
+
+
+  
+</ContentPage>

@@ -1,9 +1,25 @@
-﻿namespace POI.Client.ViewModels
+﻿using POI.Client.Data;
+using Xamarin.Forms;
+
+namespace POI.Client.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
+        private readonly LocalDataRepository _dataRepository;
+        private readonly INavigation _navigation;
+
         private string _serviceUrl;
         private string _user;
+
+        public SettingsViewModel(LocalDataRepository dataRepository, INavigation navigation)
+        {
+            _dataRepository = dataRepository;
+            _navigation = navigation;
+
+            _serviceUrl = _dataRepository.Configuration.ServiceUrl;
+            _user = _dataRepository.Configuration.User;
+            SaveCommand = new Command(Save);
+        }
 
         public string ServiceUrl
         {
@@ -23,6 +39,16 @@
                 _user = value;
                 OnPropertyChanged();
             }
+        }
+
+        public Command SaveCommand { get; set; }
+
+        public async void Save()
+        {
+            _dataRepository.Configuration.User = User;
+            _dataRepository.Configuration.ServiceUrl = ServiceUrl;
+            await _dataRepository.Save();
+            await _navigation.PopAsync(true);
         }
     }
 }
