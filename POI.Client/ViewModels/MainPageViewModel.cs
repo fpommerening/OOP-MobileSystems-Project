@@ -5,9 +5,6 @@ using POI.Client.Data;
 using POI.Client.Geolocation;
 using Xamarin.Forms;
 
-
-
-
 namespace POI.Client.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
@@ -108,7 +105,15 @@ namespace POI.Client.ViewModels
 
         private bool CanGetLocation()
         {
-            return _locationService.IsGeolocationAvailable && _locationService.IsGeolocationEnabled;
+            try
+            {
+                return _locationService.IsGeolocationEnabled && _locationService.IsGeolocationAvailable;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            return false;
         }
 
         private async void FillList()
@@ -127,6 +132,7 @@ namespace POI.Client.ViewModels
                     Longtitude = (double)poi.Longtitude / 100000,
                     Subject = poi.Name,
                     CreateOn = poi.CreateOn,
+                    Description = poi.Description,
                     User = poi.User
                 });
             }
