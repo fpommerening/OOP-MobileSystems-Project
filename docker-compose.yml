@@ -1,0 +1,26 @@
+version: "3.4"
+services:
+    documentdb:
+        image: mongo:3.6
+        networks:
+            - functions
+    opi-service:
+        image: fpommerening/spartakiade2018:poi-service
+        networks:
+            - functions
+        secrets:
+          - DocumentDBCnn
+        environment:
+          LETSENCRYPT_EMAIL: "frank@openfaas-dotnet.de"
+          LETSENCRYPT_HOST: "poi.openfaas-dotnet.de"
+          VIRTUAL_HOST: "poi.openfaas-dotnet.de"
+          VIRTUAL_PORT: "8080"
+secrets:
+  DocumentDBCnn:
+      external:
+          name: PoIDBCnn
+          
+networks:
+  functions:
+    external:
+          name: functions

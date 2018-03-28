@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -13,9 +11,7 @@ namespace POI.Service.Data
 
         public async Task<string> SavePointOfInterest(PointOfInterest poi)
         {
-            var client = Client();
-            var db = client.GetDatabase("PointOfInterestStore");
-            var collection = db.GetCollection<PointOfInterest>("PointOfInterests");
+            var collection = Database().GetCollection<PointOfInterest>("PointOfInterests");
             if (poi.Id == ObjectId.Empty)
             {
                 await collection.InsertOneAsync(poi);
@@ -31,32 +27,38 @@ namespace POI.Service.Data
 
         public async Task<List<PointOfInterest>> GetPointsOfInterest(int latitude, int longtitude)
         {
-            var list = new List<PointOfInterest>();
+            var resultList = new List<PointOfInterest>();
 
-            var client = Client();
-            var db = client.GetDatabase("PointOfInterestStore");
-            var collection = db.GetCollection<PointOfInterest>("PointOfInterests");
+            var collection = Database().GetCollection<PointOfInterest>("PointOfInterests");
             var builder = Builders<PointOfInterest>.Filter;
 
             //builder.GeoWithinCenterSphere(x => x.loc, latitude, longtitude, 10);
 
             //builder.GeoWithinCenterSphere(x => x.loc, latitude, longtitude, 10);
 
-            
+            var filter = builder.Empty;
 
-        
-            
-
-
-
-            return list;
+            using (var filterResult = collection.FindSync(filter))
+            {
+                while (filterResult.MoveNext())
+                {
+                    resultList.AddRange(filterResult.Current);
+                }
+            }
+            return resultList;
         }
 
 
-        private IMongoClient Client()
+
+        private IMongoDatabase Database()
         {
-            var cnn = DockerSecretHelper.GetSecretValue("DocumentDBCnn");
-            return _mongoClient ?? (_mongoClient = new MongoClient(cnn));
+            if (_mongoClient == null)
+            {
+                var cnn = DockerSecretHelper.GetSecretValue("DocumentDBCnn");
+                _mongoClient = new MongoClient(cnn);
+            }
+            return _mongoClient.GetDatabase("PointOfInterestStore"); ;
         }
+    
     }
 }
