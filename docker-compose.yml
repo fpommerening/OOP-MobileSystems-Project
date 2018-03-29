@@ -1,6 +1,6 @@
 version: "3.4"
 services:
-    documentdb:
+    poidb:
         image: mongo:3.6
         networks:
             - functions
@@ -18,7 +18,7 @@ services:
           VIRTUAL_HOST: "poi.openfaas-dotnet.de"
           VIRTUAL_PORT: "8080"
         depends_on:
-            - documentdb
+            - poidb
 secrets:
   DocumentDBCnn:
       external:
