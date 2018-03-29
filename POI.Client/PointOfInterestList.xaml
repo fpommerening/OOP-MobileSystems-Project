@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="POI.Client.PointOfInterestList">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Übertragen" Command="{Binding TransmitCommand}"></ToolbarItem>
-        <ToolbarItem Text="Leeren" Command="{Binding ClearCommand}"></ToolbarItem>
+        <ToolbarItem Icon="ic_cloud_upload_white.png" Command="{Binding TransmitCommand}"></ToolbarItem>
+        <ToolbarItem Icon="ic_delete_forever_white.png" Command="{Binding ClearCommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -24,7 +24,7 @@
                                   <Label Text="{Binding Latitude}"></Label>
                                   <Label Text="{Binding Longtitude}"></Label>
                                   <Label Text="{Binding Subject}"></Label>
-                                  <Label Text="{Binding CreateOn:d}"></Label>
+                                  <Label Text="{Binding CreateOn, StringFormat='{0:d}'}"></Label>
                               </StackLayout>
                                   <Label Text="{Binding Description}"></Label>
                             </StackLayout>

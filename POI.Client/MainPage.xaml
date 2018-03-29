@@ -5,11 +5,11 @@
              x:Class="POI.Client.MainPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="GPS-Abfragen" Command="{Binding GetLocationCommand}"></ToolbarItem>
-        <ToolbarItem Text="Umkreissuche" Command="{Binding FillListCommand}"></ToolbarItem>
-        <ToolbarItem Text="Hinzufügen" Command="{Binding CreatePoICommand}"></ToolbarItem>
-        <ToolbarItem Text="Einstellungen" Command="{Binding OpenSettingsCommand}"></ToolbarItem>
-        <ToolbarItem Text="Liste" Command="{Binding OpenMyPoIListCommand}"></ToolbarItem>
+        <ToolbarItem Icon="ic_location_on_white.png" Command="{Binding GetLocationCommand}"></ToolbarItem>
+        <ToolbarItem Icon="ic_my_location_white.png" Command="{Binding FillListCommand}"></ToolbarItem>
+        <ToolbarItem Icon="ic_add_circle_white.png" Command="{Binding CreatePoICommand}"></ToolbarItem>
+        <ToolbarItem Icon="ic_build_white.png" Command="{Binding OpenSettingsCommand}"></ToolbarItem>
+        <ToolbarItem Icon="ic_list_white.png" Command="{Binding OpenMyPoIListCommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
