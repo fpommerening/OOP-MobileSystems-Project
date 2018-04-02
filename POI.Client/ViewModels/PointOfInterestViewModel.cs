@@ -7,7 +7,7 @@ namespace POI.Client.ViewModels
     public class PointOfInterestViewModel : BaseViewModel
     {
         private readonly INavigation _navigation;
-        private readonly LocalDataRepository _dataRepository;
+        private readonly ILocalDataRepository _dataRepository;
         private double _latitude;
         private double _longtitude;
         private string _subject;
@@ -16,7 +16,7 @@ namespace POI.Client.ViewModels
         private string _user;
         private bool _transmitted;
 
-        public PointOfInterestViewModel(INavigation navigation, LocalDataRepository dataRepository)
+        public PointOfInterestViewModel(INavigation navigation, ILocalDataRepository dataRepository)
         {
             _navigation = navigation;
             _dataRepository = dataRepository;

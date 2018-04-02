@@ -10,12 +10,12 @@ namespace POI.Client.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         private readonly INavigation _navigation;
-        private readonly LocalDataRepository _dataRepository;
+        private readonly ILocalDataRepository _dataRepository;
         private readonly IGeolocationService _locationService;
         private double _longtitude = Double.NaN;
         private double _latitude = Double.NaN;
 
-        public MainPageViewModel(INavigation navigation, LocalDataRepository dataReposity, IGeolocationService locationService)
+        public MainPageViewModel(INavigation navigation, ILocalDataRepository dataReposity, IGeolocationService locationService)
         {
             _navigation = navigation;
             _dataRepository = dataReposity;

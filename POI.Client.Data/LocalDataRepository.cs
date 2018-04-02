@@ -9,7 +9,7 @@ using POI.Client.Data.Models;
 
 namespace POI.Client.Data
 {
-    public class LocalDataRepository
+    public class LocalDataRepository : ILocalDataRepository
     {
         private readonly string _configurationPath;
         private readonly string _pointsPath;

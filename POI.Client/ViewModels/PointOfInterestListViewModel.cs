@@ -8,9 +8,9 @@ namespace POI.Client.ViewModels
 {
     public class PointOfInterestListViewModel : BaseViewModel
     {
-        private readonly LocalDataRepository _dataRepository;
+        private readonly ILocalDataRepository _dataRepository;
 
-        public PointOfInterestListViewModel(LocalDataRepository dataRepository)
+        public PointOfInterestListViewModel(ILocalDataRepository dataRepository)
         {
             _dataRepository = dataRepository;
             TransmitCommand = new Command(Transmit, CanTransmit);

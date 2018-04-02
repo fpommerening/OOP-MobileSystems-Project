@@ -13,7 +13,7 @@ namespace POI.Client
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PointOfInterestList : ContentPage
     {
-        public PointOfInterestList(LocalDataRepository dataRepository)
+        public PointOfInterestList(ILocalDataRepository dataRepository)
         {
             InitializeComponent();
             BindingContext = new PointOfInterestListViewModel(dataRepository);

@@ -5,13 +5,13 @@ namespace POI.Client.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        private readonly LocalDataRepository _dataRepository;
+        private readonly ILocalDataRepository _dataRepository;
         private readonly INavigation _navigation;
 
         private string _serviceUrl;
         private string _user;
 
-        public SettingsViewModel(LocalDataRepository dataRepository, INavigation navigation)
+        public SettingsViewModel(ILocalDataRepository dataRepository, INavigation navigation)
         {
             _dataRepository = dataRepository;
             _navigation = navigation;

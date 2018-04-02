@@ -13,7 +13,7 @@ namespace POI.Client
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Settings : ContentPage
 	{
-		public Settings (LocalDataRepository dataRepository, INavigation navigation)
+		public Settings (ILocalDataRepository dataRepository, INavigation navigation)
 		{
 			InitializeComponent ();
             this.BindingContext = new SettingsViewModel(dataRepository, navigation);
