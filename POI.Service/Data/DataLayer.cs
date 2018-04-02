@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace POI.Service.Data
 {
@@ -29,14 +30,13 @@ namespace POI.Service.Data
         {
             var resultList = new List<PointOfInterest>();
 
+            var geo = new GeoJson2DGeographicCoordinates((double)latitude / 100000,
+                (double)longtitude / 100000);
+
             var collection = Database().GetCollection<PointOfInterest>("PointOfInterests");
             var builder = Builders<PointOfInterest>.Filter;
 
-            //builder.GeoWithinCenterSphere(x => x.loc, latitude, longtitude, 10);
-
-            //builder.GeoWithinCenterSphere(x => x.loc, latitude, longtitude, 10);
-
-            var filter = builder.Empty;
+            var filter = builder.NearSphere(x => x.Location, new GeoJsonPoint<GeoJson2DGeographicCoordinates>(geo), 1000);
 
             using (var filterResult = collection.FindSync(filter))
             {

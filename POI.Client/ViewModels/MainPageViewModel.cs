@@ -119,7 +119,7 @@ namespace POI.Client.ViewModels
         private async void FillList()
         {
             var sc = new ServiceClient(_dataRepository.Configuration.ServiceUrl);
-            var dto = await sc.GetPointsOfInterest((int) Latitude * 100000, (int) Longtitude * 100000);
+            var dto = await sc.GetPointsOfInterest((int)(Latitude * 100000), (int) (Longtitude * 100000));
 
             PointsOfInterest.Clear();
 
