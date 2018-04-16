@@ -30,8 +30,8 @@ namespace POI.Service.Data
         {
             var resultList = new List<PointOfInterest>();
 
-            var geo = new GeoJson2DGeographicCoordinates((double)latitude / 100000,
-                (double)longtitude / 100000);
+            var geo = new GeoJson2DGeographicCoordinates((double)longtitude / 100000,
+                (double)latitude / 100000);
 
             var collection = Database().GetCollection<PointOfInterest>("PointOfInterests");
             var builder = Builders<PointOfInterest>.Filter;

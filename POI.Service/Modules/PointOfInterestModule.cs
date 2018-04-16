@@ -19,8 +19,8 @@ namespace POI.Service.Modules
                 var dl = new Data.DataLayer();
                 var dto = this.Bind<Contracts.PointOfInterest>();
 
-                var geo = new GeoJson2DGeographicCoordinates((double) dto.Latitude / 100000,
-                    (double) dto.Longtitude / 100000);
+                var geo = new GeoJson2DGeographicCoordinates(
+                    (double) dto.Longtitude / 100000, (double)dto.Latitude / 100000);
 
                 var dbo = new Data.PointOfInterest
                 {
