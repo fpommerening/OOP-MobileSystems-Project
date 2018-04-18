@@ -39,15 +39,32 @@
                 <section>
                     <h2>Xamarin</h2>
                 </section>
-                <section></section>
+                <section>
+                    <ul>
+                        <li>2011: Gründung Firma Xamarin durch Miguel De Icaza</li>
+                        <li>Ziel: kommerzielle Angebote für Entwicklung mobiler Systeme mit C#</li>
+                        <li class="fragment" data-fragment-index="2">Vorläufer: Mono Droid / Mono für Android</li>
+                        <li class="fragment" data-fragment-index="3">Veröffentlichungen:
+                            <ul>
+                                <li>Xamarin.Android (2011)</li>
+                                <li>Xamarin.Mac (2012)</li>
+                            </ul>
+                        </li>
+                        <li class="fragment" data-fragment-index="4">2016: Übernahme durch Microsoft
+                            <ul>
+                                <li>Abschaffung Lizenzkosten</li>
+                                <li>Integration in IDE Visual Studio / Visual Studio for MAC</li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </section>
             </section>
             <section>
                 <section>
                     <h2>Crossplatform-Entwicklung</h2>
                 </section>
-                <section>
 
-                </section>
                 <section>
                     <h3>Xamarin native</h3>
                     <img src="images/xamarin-native.png" style="height: 400px;" />
@@ -59,9 +76,31 @@
                 <section>
                     <h3>Xamarin Forms</h3>
                     <img src="images/xamarin-forms.png" style="height: 400px;" />
-                    <p class="fragnent">
-                        Flexibilität vor Wiederverwendung
+                    <p class="fragment">
+                        Wiederverwendung vor Flexibilität
                     </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>POI-App</h3>
+                    <img src="images/POI.png" style="height: 400px;border: 0px;float: left;margin-left: 25px;" />
+                    <ul>
+                        <li>Android-Client
+                            <ul>
+                                <li>Xamarin Forms (C#)</li>
+                                <li>JSON-Dateien (lokale Daten)</li>
+                            </ul>
+                        </li>
+                        <li>REST-API
+                            <ul>
+                                <li>ASP.NET Core 2 (C#)</li>
+                                <li>MongoDB</li>
+                                <li>Docker</li>
+                                <li>HTTPS-Veröffentlichung</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </section>
             </section>
             <section>
@@ -69,7 +108,64 @@
                     <h2>MVVM</h2>
                     <h3>Model View Viewmodel</h3>
                 </section>
-                <section></section>
+                <section>
+                    <h3>Model</h3>
+                    <pre><code class="cs">namespace POI.Client.Data
+{
+    public class LocalDataRepository : ILocalDataRepository
+    {
+        public LocalDataRepository(string localPath) { ... }
+                            
+        public Configuration Configuration { get; set; } = new Configuration();
+                            
+        public async Task Load() { ... }
+                            
+        public async Task Save() { ... }
+    }
+}</code></pre>
+                </section>
+                <section>
+                        <h3>ViewModel</h3>
+                        Enthält die Geschäftslogik u.a. Validierung.
+                        <pre><code class="cs">namespace POI.Client.ViewModels
+{
+    public class SettingsViewModel : BaseViewModel
+    {
+        public SettingsViewModel(ILocalDataRepository dataRepository ...)
+        {  ...  SaveCommand = new Command(Save); ...  }
+    
+        public string ServiceUrl { ... }
+        public string User { ... }
+    
+        public Command SaveCommand {    ... }
+
+        public async void Save()
+        {   ...     await _dataRepository.Save(); ...    }
+    }
+}</code></pre>
+                    </section>
+                    <section>
+                            <h3>View</h3>
+                            <pre><code class="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+        x:Class=&quot;POI.Client.Settings&quot;&gt;
+    &lt;ContentPage.Content&gt;
+        &lt;StackLayout&gt;
+            &lt;Label Text=&quot;Benutzer&quot;&gt;&lt;/Label&gt;
+            &lt;Entry Placeholder=&quot;Vorname und Nachname&quot; Text=&quot;{Binding User, Mode=TwoWay}&quot;&gt;&lt;/Entry&gt;
+            &lt;Label Text=&quot;Service-URL&quot;&gt;&lt;/Label&gt;
+            &lt;Entry Placeholder=&quot;komplette URL&quot; Text=&quot;{Binding ServiceUrl, Mode=TwoWay}&quot;&gt;&lt;/Entry&gt;
+            &lt;Button Text=&quot;Speichern&quot; Command=&quot;{Binding SaveCommand}&quot;&gt;&lt;/Button&gt;
+        &lt;/StackLayout&gt;
+    &lt;/ContentPage.Content&gt;
+&lt;/ContentPage&gt;</code></pre>
+                </section>
+            </section>
+            <section>
+                    <section><h2>Fazit</h2></section>
+                    <section></section>
             </section>
             <section>
                 <h2>Vielen Dank für die Aufmerksamkeit</h2>
